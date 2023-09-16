@@ -5,19 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeatherWonders.com</title>
-    <link rel="stylesheet" type="text/css" href="./static/css/design.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     <link rel="stylesheet" type="text/css" href="./static/css/design.css">
 </head>
 <body>
     <section id="hero" class="d-flex justify-content-center align-items-center">
-        <div class="heroText">
-            <img class="heroImg" src="./static/img/HERO.jpg">
-            <div>
+        <div class="container">
+            <div class="content text-center text-white mb-4">
                 <h1>Weatherswonder</h1>
-                <h2>Explore the Forecast, Embrace the Elements</h2>
+                <h3>Explore the Forecast, Embrace the Elements</h3>
             </div>
+
+            <div id="map"></div>
+
+            <div class="formWrapper mt-4">
+                <form action="" method="get">
+                    <div class="formRow d-flex">
+                        <div class="field flex-fill me-5">
+                            <label class="content text-center text-white" for="lat">Latitude</label>
+                            <input class="d-block" type="text" name="lat" id="lat" placeholder="51.44">
+                        </div>
+    
+                        <div class="field flex-fill ms-5">
+                            <label class="content text-center text-white" for="lng">Longitude</label>
+                            <input class="d-block" type="text" name="lng" id="lng" placeholder="51.44">
+                        </div>
+                    </div>
+    
+                    <div class="formRow d-flex">
+                        <div class="field flex-fill me-5">
+                            <input class="d-block btn btn-light" type="reset" value="Reset">
+                        </div>
+    
+                        <div class="field flex-fill ms-5">
+                            <input class="d-block btn btn-success" type="submit" value="Richiedi i dati">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <ul></ul>
         </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+     <script src="static/js/meteo.js"></script>
 </body>
 </html>
