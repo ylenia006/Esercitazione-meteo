@@ -1,17 +1,43 @@
-var map = L.map('map').setView([51.505, -0.09], 13);
+navigator.geolocation.getCurrentPosition(
+    function (event)
+    {
+        let latitudineUtente = event.coords.latitude
+        let longitudineUtente = event.coords.longitude
+        console.log(latitudineUtente)
+        console.log(longitudineUtente)
+        console.log(event.coords.longitude)
+        console.log("l'utente ha accettato")
+        document.querySelector("#lat").value = latitudineUtente
+        document.querySelector("#lng").value = longitudineUtente
+        
+        createMap(latitudineUtente,longitudineUtente)
+    },
+    function (event)
+    {
+        console.log("l'utente non ha accettato")
+        createMap(20, -1)
+    }
+)
 
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+function createMap (lat, lng)
+{
+    var map = L.map('map').setView([lat, lng], 13);
 
-map.on("click", function(e) {
-    console.log(e)
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
 
-    var marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map)
+    let marker = L.marker([lat,lng]).addTo(map);
 
-    let latitudine = document.querySelector("#lat").value = e.latlng.lat
-    let longitudine = document.querySelector("#lng").value = e.latlng.lng 
-})
+    map.on("click", function(e) {
+        console.log(e)
+
+        var marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map)
+
+        document.querySelector("#lat").value = e.latlng.lat
+        document.querySelector("#lng").value = e.latlng.lng 
+    })
+}
 
 
 document.querySelector("form").addEventListener("submit", function (event) {
@@ -33,3 +59,4 @@ document.querySelector("form").addEventListener("submit", function (event) {
         console.log(data.hourly.temperature_2m)
     })
 })
+

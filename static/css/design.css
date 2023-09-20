@@ -53,13 +53,8 @@ input
 { 
     height: 280px;
     width: 80%;
-
+    z-index: 1;
+    border-radius: 20px;
     margin-left: auto;
     margin-right: auto;
-}
-.border
-{
-    border: 2px solid black;
-    overflow: hidden;
-    border-radius: 20px;
 }
