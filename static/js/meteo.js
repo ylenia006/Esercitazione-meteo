@@ -1,3 +1,9 @@
+let canvas = document.querySelector("canvas");
+
+let chart
+
+
+
 navigator.geolocation.getCurrentPosition(
     function (event)
     {
@@ -55,8 +61,64 @@ document.querySelector("form").addEventListener("submit", function (event) {
     fetch(url).then(function (resp) {
         return resp.json()
     }).then(function (data) {
+        if(chart != undefined){
+            chart.destroy()
+        }
         console.log(data.hourly.time)
         console.log(data.hourly.temperature_2m)
+
+        let dates = []
+        let temp = []
+        let humid = []
+
+        let config = {
+            type: 'line',
+            data: 
+            {
+                labels: data.hourly.time,
+                datasets: 
+                [
+                    {
+                        label: 'Temperatura a 2m',
+                        data: data.hourly.temperature_2m,
+                        fill: false,
+                        borderColor: 'rgb(255, 0, 0)',
+                        tension: 0.1,
+                        yAxisID: "y1"
+                    },
+                    {
+                        label: 'Umidità a 2m',
+                        data: data.hourly.relativehumidity_2m,
+                        fill: false,
+                        borderColor: 'rgb(0, 0, 255)',
+                        tension: 0.1,
+                        yAxisID: "y2"
+                    }
+                ]
+            },
+            options:
+            {
+                scales:
+                {
+                    y1:
+                    {
+                        type: "linear",
+                        display: true,
+                        position: "left"
+                    },
+
+                    y2:
+                    {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                    }
+                }
+            }
+          };
+          canvas.classList.remove("d-none");
+
+          chart = new Chart (canvas, config);
+
     })
 })
-
